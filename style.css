@@ -78,7 +78,7 @@ body:has(#first:hover,#second:hover,#third:hover,#fourth:hover,#fifth:hover,#six
     margin-top: 10px;
 }
 .logo{
-     margin: 0;
+    margin: 0;
     padding-left: 30px;
     font-family: "Bitcount ink", sans-serif;
     font-size: 45px;
@@ -90,15 +90,23 @@ body:has(#first:hover,#second:hover,#third:hover,#fourth:hover,#fifth:hover,#six
     min-height: 70px;
     padding: 0 3rem;
 
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+     position: fixed; /* Keeps it in place relative to the viewport */
+  top: 20px;       /* Pushes it down from the top edge */
+  left: 50%;       /* Center alignment helper */
+  transform: translateX(-50%); /* Centers the bar horizontally */
+  width: 100%;      /* Adjust width as needed */
+  max-width: 1200px; /* Keeps it above other content */
+  
+  /* Styling to make it look like a floating card */
+  border-radius: 50px;
     box-sizing: border-box;
     z-index: 9999;
+    background-color: rgba(28, 28, 28, 0.78);
+backdrop-filter: blur(16px) saturate(125%);
+-webkit-backdrop-filter: blur(16px) saturate(125%);
 
-    background-color: #1A1A1A;
-    border-bottom: 1px solid #000;
+border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
 }
 .navigation .midTools li a{
     display: flex;
@@ -153,6 +161,12 @@ body:has(#first:hover,#second:hover,#third:hover,#fourth:hover,#fifth:hover,#six
         transform: scale(0.94);
     }
 }
+@media (hover: hover) and (pointer: fine) {
+    .github:hover::before {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
 
 .navigation ul{
     display: flex;
@@ -203,6 +217,10 @@ body:has(#first:hover,#second:hover,#third:hover,#fourth:hover,#fifth:hover,#six
 .navigation li{
     float: none;
 }
+.vertical-hr {
+  width: 5px;
+  transform: rotate(90deg);
+}
 .github{
     position: relative;
     display: flex;
@@ -248,7 +266,19 @@ body:has(#first:hover,#second:hover,#third:hover,#fourth:hover,#fifth:hover,#six
     top: 100%;
     z-index: 10000;
 }
+#my-Movies {
+    position: relative;
+    isolation: isolate;
+}
 
+#my-Movies::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+        url("images/movieBackground.jpg");
+    z-index: -1;
+}
 
 
 @media (hover: hover) and (pointer: fine) {
@@ -823,7 +853,8 @@ header h4{
     clear: none;
     margin: 10px 20px;
     box-sizing: border-box;
-    border: #E0E0E0 solid 2px;
+    border: #E0E0E0 dotted 2px;
+    border-radius: 20px;
 }
 #design h2,#coding h2, #database h2, #ai h2{
     text-decoration: underline #aaa;
@@ -960,7 +991,32 @@ header h4{
     left: -15px;
 }
 
+hr{
+  border: none;
+  height: 2px;
+  /* Fades line from transparent to full color (#ff4757) to transparent */
+  background-image: linear-gradient(to right, transparent, #ff4757 30%, #ff4757 70%, transparent);
+  margin: 40px auto;
+  width: 80%;
+  overflow: visible; /* Required: Allows the symbol to display beyond the thin 2px height */
+  text-align: center;
+  position: relative;
+}
 
+hr::after {
+  content: ""; 
+  font-size: 1.5rem;
+  
+  /* Centers the icon perfectly on top of the fading line */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  
+  /* Masking the line underneath the icon */
+  background-color: #121212; /* CRITICAL: Change this to match your EXACT website background color */
+  padding: 0 15px;            /* Adds a clean gap between the line's gradient edges and the icon */
+}
 
 @media(max-width:1201px){
      .navigation {
