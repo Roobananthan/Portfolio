@@ -91,7 +91,7 @@ body:has(#first:hover,#second:hover,#third:hover,#fourth:hover,#fifth:hover,#six
     padding: 0 3rem;
 
      position: fixed; /* Keeps it in place relative to the viewport */
-  top: 20px;       /* Pushes it down from the top edge */
+  top: 8px;       /* Pushes it down from the top edge */
   left: 50%;       /* Center alignment helper */
   transform: translateX(-50%); /* Centers the bar horizontally */
   width: 100%;      /* Adjust width as needed */
