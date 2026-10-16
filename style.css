@@ -82,6 +82,7 @@ body:has(#first:hover,#second:hover,#third:hover,#fourth:hover,#fifth:hover,#six
     padding-left: 30px;
     font-family: "Bitcount ink", sans-serif;
     font-size: 45px;
+    text-align: left;
 }
 .navigation{
     display: grid;
@@ -1310,10 +1311,6 @@ hr::after {
         text-align: center;
     
     }
-    .navigation {
-        padding: 10px;
-        gap: 4px;
-    }
 
 
     .midTools {
@@ -1348,6 +1345,9 @@ hr::after {
     .logo{
         padding-left: 5px;
         font-size: 25px;
+    }
+    .navigation{
+        top: 5px;
     }
 
     
