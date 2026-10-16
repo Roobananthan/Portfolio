@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="228" height="228" viewBox="0 0 228 228" role="img" aria-labelledby="title">
+  <title id="title">Four-pane grey window icon</title>
+  <rect x="25" y="30" width="178" height="178" rx="12" fill="none" stroke="#929090" stroke-width="12"/>
+  <path d="M114 30 V208 M25 119 H203" fill="none" stroke="#929090" stroke-width="12"/>
+  <g fill="#929090">
+    <rect x="49" y="54" width="42" height="42"/>
+    <rect x="139" y="54" width="42" height="42"/>
+    <rect x="49" y="144" width="42" height="42"/>
+    <rect x="139" y="144" width="42" height="42"/>
+  </g>
+</svg>
