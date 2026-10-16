@@ -137,9 +137,21 @@ body:has(#first:hover,#second:hover,#third:hover,#fourth:hover,#fifth:hover,#six
                 transform 0.2s ease;
 }
 
-.midTools li a img:hover{
-    opacity: 1;
-    transform: translateY(-2px);
+
+/* Hover animation only on mouse/trackpad */
+@media (hover: hover) and (pointer: fine) {
+    .midTools li a:hover img {
+        opacity: 1;
+        transform: translateY(-2px) scale(1.05);
+    }
+}
+
+/* Small press feedback on phones */
+@media (hover: none), (pointer: coarse) {
+    .midTools li a:active img {
+        opacity: 1;
+        transform: scale(0.94);
+    }
 }
 
 .navigation ul{
@@ -239,27 +251,22 @@ body:has(#first:hover,#second:hover,#third:hover,#fourth:hover,#fifth:hover,#six
 
 
 
-/* Mouse / trackpad */
 @media (hover: hover) and (pointer: fine) {
-    .github:hover::before,
     .Icons:hover::before {
-        transform: translate(-50%, 0) rotate(0);
+        transform: translate(-50%, 0);
         opacity: 1;
     }
 }
 
-/* Touchscreens: label appears only while pressed */
+/* Phone: show label only while finger is pressing */
 @media (hover: none), (pointer: coarse) {
-    .github:active::before,
-    .Icons:active::before {
-        transform: translate(-50%, 0) rotate(0);
-        opacity: 1;
-    }
-}
-@media (hover: none), (pointer: coarse) {
-    .github:hover::before,
     .Icons:hover::before {
         opacity: 0;
+    }
+
+    .Icons:active::before {
+        transform: translate(-50%, 0);
+        opacity: 1;
     }
 }
 .github::after,
@@ -349,10 +356,7 @@ hr.navigationbar{
 h1, h2, h3, h4{
     text-align: center;
 }
-p,
-.text-box2 p {
-    text-align: left;
-}
+
 
 .text,
 .box,
@@ -441,113 +445,121 @@ label{
     padding: 2px 10px;
     border-radius: 10px;
     margin-top: 10px;
-}
-
-.CinemaInterest{
-    margin:30px auto;
+}/* Movie marquee viewport */
+.CinemaInterest {
+    position: relative;
+    display: block;
     width: 90%;
-    border: none;
-    display: flex;
-    overflow:hidden;
-    animation: appear linear;
-    animation-timeline: view();
-    animation-range: entry 0% cover 30%;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer and Edge */
-    position: relative;
-    
-}
-#my-Movies {
-    position: relative;
+    margin: 30px auto;
+    overflow: hidden;
     isolation: isolate;
 }
 
-#my-Movies::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
-        url("images/movieBackground.jpg");
-    z-index: -1;
+/* The moving strip: contains TWO identical .group elements */
+.CinemaInterest .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: movie-marquee 25s linear infinite;
+    will-change: transform;
 }
 
-.CinemaInterest::-webkit-scrollbar{
-    display: none;
-}
-.group{
+/* Each set of movie cards */
+.CinemaInterest .group {
     display: flex;
     flex: 0 0 auto;
-    justify-content: center;
-    gap: 1em;
-    animation: spin 15s linear infinite;
-    
+    gap: 1rem;
+    padding-right: 1rem;
 }
-.CinemaInterest:hover .group{
-    animation-play-state: paused;
-}
-.CinemaInterest:before,.CinemaInterest:after{
-    position: absolute;
-    top: 0;
-    width: 100px;
-    height: 100%;
-    content: "";
-    z-index: 999;
-}
-.CinemaInterest:before{
-    left: 0;
-background: linear-gradient(to left,rgba(255,255,255,0),#1A1A1A);
-}
-.CinemaInterest:after{
-    right: 0;
-    background: linear-gradient(to right,rgba(255,255,255,0),#1A1A1A);
-}
-.movie{
+
+/* Movie card */
+.CinemaInterest .movie {
     flex: 0 0 200px;
-    height:300px;
-    width:100%;
-    background:whitesmoke;
-    color: #1A1A1A;
-    font-size: 3rem;
-    border-radius: 0em;
-    text-align: center;
-    align-content: center;
+    width: 200px;
+    height: 300px;
     overflow: hidden;
     display: flex;
+    background: whitesmoke;
+    color: #1A1A1A;
+    text-align: center;
 }
-.movie img{
+
+/* Movie poster fills the card */
+.CinemaInterest .movie img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    display: block;
 }
 
-@keyframes spin{
-    to{transform: translateX(0);}
-    from{transform: translateX(-100%);}
+/* Fade the cards at the left and right edges */
+.CinemaInterest::before,
+.CinemaInterest::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
 }
+
+.CinemaInterest::before {
+    left: 0;
+    background: linear-gradient(to right, #1A1A1A, transparent);
+}
+
+.CinemaInterest::after {
+    right: 0;
+    background: linear-gradient(to left, #1A1A1A, transparent);
+}
+
+/* Seamless loop: the second identical group replaces the first */
+@keyframes movie-marquee {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause only for devices that genuinely support mouse hover */
 @media (hover: hover) and (pointer: fine) {
-    .CinemaInterest:hover .group {
+    .CinemaInterest:hover .marquee-track {
         animation-play-state: paused;
     }
 }
 
-/* Don't pause just because a phone tapped it */
-@media (hover: none), (pointer: coarse) {
-    .CinemaInterest:hover .group {
-        animation-play-state: running;
-    }
-}
-@keyframes appear{
-    from {
-        opacity:0;
-        scale:0.5;
-    }
-    to{
-        opacity: 1;
-        scale: 1;
+/* Smaller movie cards on narrow screens */
+@media (max-width: 600px) {
+    .CinemaInterest {
+        width: 100%;
     }
 
+    .CinemaInterest .movie {
+        flex-basis: 165px;
+        width: 165px;
+        height: 225px;
+    }
+
+    .CinemaInterest::before,
+    .CinemaInterest::after {
+        width: 35px;
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .CinemaInterest {
+        overflow-x: auto;
+    }
+
+    .CinemaInterest .marquee-track {
+        animation: none;
+        will-change: auto;
+    }
 }
 
 .games img{
