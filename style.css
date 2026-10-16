@@ -92,7 +92,7 @@ body:has(#first:hover,#second:hover,#third:hover,#fourth:hover,#fifth:hover,#six
     padding: 0 3rem;
 
      position: fixed; /* Keeps it in place relative to the viewport */
-  top: 8px;       /* Pushes it down from the top edge */
+  top: 5px;       /* Pushes it down from the top edge */
   left: 50%;       /* Center alignment helper */
   transform: translateX(-50%); /* Centers the bar horizontally */
   width: 100%;      /* Adjust width as needed */
@@ -855,7 +855,7 @@ header h4{
     margin: 10px 20px;
     box-sizing: border-box;
     border: #E0E0E0 dotted 2px;
-    border-radius: 20px;
+    border-radius: 50px;
 }
 #design h2,#coding h2, #database h2, #ai h2{
     text-decoration: underline #aaa;
@@ -1020,11 +1020,6 @@ hr::after {
 }
 
 @media(max-width:1201px){
-     .navigation {
-        padding: 0 1.5rem;
-        grid-template-columns: auto 1fr auto;
-        gap: 1rem;
-    }
     
     .logo {
         padding-left: 0;
@@ -1347,7 +1342,7 @@ hr::after {
         font-size: 25px;
     }
     .navigation{
-        top: 5px;
+        top: 4px;
     }
 
     
