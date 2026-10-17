@@ -1,8 +1,11 @@
 
-
+html{
+    overflow-x: clip;
+}
     ::-webkit-scrollbar{
         width: 8px;
     }
+    
     ::-webkit-scrollbar-track {
     background: #1A1A1A;
 }
@@ -31,7 +34,8 @@
 
 body{
     background-color:#1A1A1A;
-    width: auto;
+    width: 100%;
+    overflow-x: clip;
     transition: background-color 0.3s ease; 
     color: #E0E0E0;
     
@@ -95,8 +99,8 @@ body:has(#first:hover,#second:hover,#third:hover,#fourth:hover,#fifth:hover,#six
   top: 7px;       /* Pushes it down from the top edge */
   left: 50%;       /* Center alignment helper */
   transform: translateX(-50%); /* Centers the bar horizontally */
-  width: 100%;      /* Adjust width as needed */
-  max-width: 1200px; /* Keeps it above other content */
+  width: 99%;      /* Adjust width as needed */
+  max-width: 1600px; /* Keeps it above other content */
   
   /* Styling to make it look like a floating card */
   border-radius: 50px;
@@ -306,58 +310,78 @@ box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
 }
 
 .sidebar{
-    position: fixed;
+     position: fixed;
     top: 0;
     right: 0;
     height: 100vh;
+    height: 100dvh;
     width: 250px;
-    z-index: 999;
+    box-sizing: border-box;
+    z-index: 10001;
 
+    /* Remove default UL styling */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    /* Your original glass appearance */
     background-color: rgba(10, 10, 10, 0.75);
-    backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
 
-    
     box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+    border-left: #000 solid 4px;
 
+    /* Layout */
     display: none;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     gap: 40px;
-    border-left: #000 solid 4px;
+
+    /* Prevent content from exceeding the screen */
+    overflow-y: auto;
+    overscroll-behavior: contain;
 }
 .navigation .sidebar {
     display: none;
 }
 .sidebar li{
     width: 100%;
-    
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+.sidebar li:hover {
+    opacity: 0.8;
 }
 .sidebar a{
+     display: block;
     width: 100%;
-    text-decoration: none;
-    text-align: center;
-    color: #F7F7F7;
-    display: block;
     box-sizing: border-box;
     padding: 15px 30px;
-    
+
+    color: #F7F7F7;
+    text-decoration: none;
+    text-align: center;
 }
+
 .close-menu{
-    margin-top: 40px;
+     width: 100%;
     display: flex;
     justify-content: center;
-     box-sizing: border-box;
+    box-sizing: border-box;
 }
 .close-menu button{
-    display: flex;
+     display: flex;
     align-items: center;
     justify-content: center;
     background: transparent;
     border: none;
     padding: 0;
     cursor: pointer;
+    margin-top: 40px;
 }
 .sidebar li:hover{
     opacity: 0.8;
@@ -845,17 +869,19 @@ header h4{
     display: grid;
     grid-template-columns: repeat(2, minmax(0,1fr));
     row-gap: 40px;
+    min-width: 0;
     align-items: start;
 }
 #design,#coding,#database,#ai{
-    width: 90%;
+    width: 100%;
+    margin: 10px 0;
     min-width: none;
+    max-width: 100%; 
     float: none;
     clear: none;
-    margin: 10px 20px;
     box-sizing: border-box;
     border: #E0E0E0 dotted 2px;
-    border-radius: 20px;
+    border-radius: 50px;
 }
 #design h2,#coding h2, #database h2, #ai h2{
     text-decoration: underline #aaa;
@@ -1332,8 +1358,16 @@ hr::after {
     text-underline-offset: 2px;
     margin: 10px 10px 25px;
     font-size: 2.5vh;
+    
 
 }
+.ToolUsed {
+        width: 100%;
+        padding: 0 16px;
+        box-sizing: border-box;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 12px;
+    }
 
     
 }
@@ -1341,6 +1375,18 @@ hr::after {
     
     .sidebar{
         width: 100%;
+    }
+    .menu-button svg{
+        width: 30px;
+        height: 30px;
+    }
+    .close-menu svg{
+        width: 30px;
+        height: 30px;
+    }
+    .midTools .Icons img{
+        width: 20px;
+        height: 20px;
     }
     .logo{
         padding-left: 5px;
